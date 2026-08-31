@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IITK 2026 Placement Targets, DualA Eco</title>
+<style>
+  :root {
+    color-scheme: light;
+    --font: "Avenir Next","Avenir","Nunito Sans","Segoe UI Variable Display",
+            system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --ink:#2a1c11;
+    --ink-soft:#5a4634;
+    --muted:#8a6c52;
+    --faint:#b59176;
+    --orange:#c85a17;
+    --orange-deep:#a4450c;
+    --r:26px;
+
+    --glass:linear-gradient(145deg,rgba(255,255,255,.66),rgba(255,255,255,.30));
+    --glass-hi:linear-gradient(145deg,rgba(255,255,255,.80),rgba(255,255,255,.44));
+    --glass-edge:rgba(255,255,255,.72);
+    --blur:saturate(185%) blur(26px);
+    --lift:
+      inset 0 1px 0 rgba(255,255,255,.92),
+      inset 0 -1px 0 rgba(255,255,255,.30),
+      inset 1px 0 0 rgba(255,255,255,.34),
+      0 26px 60px -26px rgba(122,58,16,.34),
+      0 6px 18px -10px rgba(122,58,16,.20);
+  }
+  * { box-sizing:border-box; }
+  html { -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%; }
+
+  body {
+    margin:0; color:var(--ink); font-family:var(--font); font-size:14.5px; line-height:1.55;
+    background:#fdf4ea; position:relative; min-height:100%; overflow-x:hidden;
+  }
+  body::before {
+    content:""; position:fixed; inset:-25%; z-index:-2; pointer-events:none;
+    background:
+      radial-gradient(38% 44% at 10% 4%,  rgba(255,163,79,.72), transparent 68%),
+      radial-gradient(34% 40% at 84% 10%, rgba(250,110,78,.52), transparent 70%),
+      radial-gradient(42% 42% at 74% 82%, rgba(255,196,116,.60), transparent 70%),
+      radial-gradient(38% 38% at 16% 74%, rgba(240,138,96,.44), transparent 70%),
+      radial-gradient(30% 34% at 46% 42%, rgba(255,222,178,.55), transparent 72%);
+    filter:blur(34px);
+    animation:drift 34s ease-in-out infinite alternate;
+  }
+  body::after {
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.30;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.5'/></svg>");
+  }
+  @keyframes drift {
+    0%   { transform:translate3d(0,0,0) scale(1); }
+    50%  { transform:translate3d(2.5%,-2%,0) scale(1.06); }
+    100% { transform:translate3d(-2%,2.5%,0) scale(1.02); }
+  }
+  @media (prefers-reduced-motion:reduce) { body::before { animation:none; } }
+
+  .wrap { max-width:1400px; margin:0 auto; padding:46px 26px 84px; }
+
+  .eyebrow {
+    font-size:11.5px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--orange-deep); margin:0 0 12px;
+  }
+  h1 {
+    font-size:clamp(27px,4vw,46px); font-weight:800; letter-spacing:-.025em;
+    line-height:1.06; margin:0 0 14px; max-width:19ch;
+    text-shadow:0 1px 0 rgba(255,255,255,.55);
+  }
+  .sub { color:var(--ink-soft); font-size:15px; max-width:78ch; margin:0 0 22px; }
+  .sub b { color:var(--ink); font-weight:700; }
+
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
+  .chip {
+    background:var(--glass); backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+    border:1px solid var(--glass-edge); border-radius:999px;
+    padding:6px 14px; font-size:12.5px; color:var(--ink-soft);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 6px 16px -10px rgba(122,58,16,.45);
+  }
+  .chip b { color:var(--ink); font-weight:700; }
+
+  .notes, .controls, .tablewrap {
+    background:var(--glass); backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+    border:1px solid var(--glass-edge); box-shadow:var(--lift);
+  }
+  .notes { border-radius:var(--r); padding:20px 24px; margin:0 0 22px; }
+  .notes p { margin:0 0 11px; font-size:13.5px; color:var(--ink-soft); line-height:1.6; }
+  .notes p:last-child { margin-bottom:0; }
+  .notes b { color:var(--ink); font-weight:700; }
+
+  .controls {
+    display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+    border-radius:calc(var(--r) + 4px); padding:14px; margin-bottom:20px;
+  }
+  input,select {
+    font:inherit; color:var(--ink); border-radius:999px; padding:12px 20px; min-width:0;
+    background:var(--glass-hi); border:1px solid var(--glass-edge);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 2px rgba(122,58,16,.07);
+  }
+  input { flex:1 1 240px; }
+  input::placeholder { color:var(--faint); }
+  input:focus,select:focus {
+    outline:none; border-color:rgba(200,90,23,.45);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 0 0 4px rgba(200,90,23,.16);
+  }
+  select { padding-right:14px; flex:0 1 200px; cursor:pointer; }
+  #count { color:var(--muted); font-size:13px; padding-right:6px; }
+
+  /* ---- table: fluid, never overflows ---- */
+  .tablewrap { border-radius:var(--r); }
+  .scroll { border-radius:inherit; }
+  table { border-collapse:collapse; width:100%; table-layout:fixed; }
+  col.c-num  { width:3.4%; }
+  col.c-co   { width:21%; }
+  col.c-cat  { width:12.6%; }
+  col.c-ctc  { width:15%; }
+  col.c-desc { width:38.5%; }
+  col.c-lnk  { width:9.5%; }
+
+  th {
+    position:sticky; top:0; z-index:2;
+    text-align:left; font-size:10.5px; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted);
+    padding:16px 18px;
+    background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.56));
+    backdrop-filter:saturate(180%) blur(18px); -webkit-backdrop-filter:saturate(180%) blur(18px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95);
+    border-bottom:1px solid rgba(180,120,70,.16);
+  }
+  th:first-child { border-top-left-radius:var(--r); padding-left:22px; }
+  th:last-child  { border-top-right-radius:var(--r); }
+  td {
+    padding:18px; vertical-align:top; overflow-wrap:anywhere;
+    border-bottom:1px solid rgba(180,120,70,.14);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.42);
+  }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr:last-child td:first-child { border-bottom-left-radius:var(--r); }
+  tbody tr:last-child td:last-child  { border-bottom-right-radius:var(--r); }
+  tbody tr:hover td { background:rgba(255,255,255,.42); }
+
+  .num { color:var(--faint); font-size:12.5px; padding-left:22px; }
+  .co strong { display:block; font-size:15px; font-weight:700; letter-spacing:-.01em; line-height:1.3; }
+  .role { display:block; color:var(--ink-soft); font-size:13.5px; margin-top:4px; }
+  .loc  { display:block; color:var(--faint); font-size:13px; margin-top:2px; }
+  .tag {
+    display:inline-block; border-radius:999px; padding:5px 12px;
+    font-size:12.5px; font-weight:600; color:var(--orange-deep);
+    background:linear-gradient(145deg,rgba(255,255,255,.80),rgba(255,214,170,.52));
+    border:1px solid rgba(255,255,255,.75);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 4px 10px -7px rgba(122,58,16,.55);
+  }
+  .ctc { color:var(--orange); font-weight:700; font-size:13.8px; line-height:1.45; }
+  .desc { color:var(--ink-soft); font-size:13.8px; line-height:1.58; }
+  .lnk a { color:var(--orange); text-decoration:none; font-weight:600; font-size:13.5px; white-space:nowrap; }
+  .lnk a:hover { color:var(--orange-deep); text-decoration:underline; }
+
+  footer { color:var(--muted); font-size:12.5px; margin-top:22px; max-width:80ch; }
+
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+    .notes,.controls,.tablewrap,.chip { background:rgba(255,250,244,.94); }
+    th { background:rgba(255,247,238,.96); }
+  }
+
+  /* ---- narrow desktop: give the description room by trimming the rest ---- */
+  @media (max-width:1180px) {
+    col.c-co { width:23%; } col.c-cat { width:14%; } col.c-lnk { width:11%; }
+    col.c-desc { width:34%; } col.c-ctc { width:14.6%; }
+  }
+
+  /* ---- phones and small tablets:each row becomes a card ---- */
+  @media (max-width:860px) {
+    .wrap { padding:30px 14px 64px; }
+    .notes { padding:18px; border-radius:20px; }
+    .controls { padding:12px; border-radius:24px; }
+    input { flex:1 1 100%; }
+    select { flex:1 1 100%; }
+    #count { padding:0 0 0 4px; }
+
+    .tablewrap { border-radius:20px; }
+    table, tbody, tr, td { display:block; width:100%; }
+    thead { display:none; }
+    colgroup { display:none; }
+
+    tbody tr {
+      position:relative; padding:18px 16px 16px; border-bottom:1px solid rgba(180,120,70,.16);
+    }
+    tbody tr:last-child { border-bottom:none; }
+    tbody tr:hover td { background:none; }
+    tbody tr:active { background:rgba(255,255,255,.42); }
+
+    td { padding:0; border:none; box-shadow:none; }
+    td + td { margin-top:9px; }
+    tbody tr:last-child td:first-child,
+    tbody tr:last-child td:last-child { border-radius:0; }
+
+    .num {
+      position:absolute; top:18px; right:16px; padding:0;
+      font-size:12px; color:var(--faint);
+    }
+    .co { padding-right:34px; }
+    .co strong { font-size:16px; }
+    .role { font-size:14px; }
+    .ctc { font-size:14.5px; }
+    .desc { font-size:14px; line-height:1.6; }
+    .lnk { margin-top:12px; }
+    .lnk a {
+      display:inline-block; padding:9px 16px; border-radius:999px;
+      background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,214,170,.50));
+      border:1px solid rgba(255,255,255,.78);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 4px 12px -8px rgba(122,58,16,.55);
+      text-decoration:none;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Placement Board</p>
+  <h1>Open roles, compensation and what they actually want</h1>
+  <p class="sub"><b>76 roles across 56 companies</b>, filtered from all 524 proformas on the SPO portal.
+  Every row is open to DualA ECO, pays 15 LPA or more and sits outside the software engineering families you wanted to skip.</p>
+
+  <div class="chips"><span class="chip">Analytics / Business Analyst <b>14</b></span><span class="chip">AI / ML Engineering <b>11</b></span><span class="chip">Data Science <b>10</b></span><span class="chip">Consulting <b>7</b></span><span class="chip">Product Management <b>6</b></span><span class="chip">Product Analyst <b>4</b></span><span class="chip">Strategy &amp; Operations <b>4</b></span><span class="chip">Finance &amp; Consulting <b>4</b></span><span class="chip">Data Science / Analytics <b>4</b></span><span class="chip">Finance / Quant Research <b>2</b></span><span class="chip">Data Engineering <b>2</b></span><span class="chip">Consulting / Analytics <b>2</b></span><span class="chip">AI / ML Research <b>2</b></span><span class="chip">Product Analyst / APM <b>1</b></span><span class="chip">Management / Business Track <b>1</b></span><span class="chip">Data Science / Data Engineering <b>1</b></span><span class="chip">Management <b>1</b></span></div>
+
+  <div class="notes">
+    <p><b>How this was built.</b> Each proforma carries a branch eligibility bitmap. I decoded it and kept only the proformas whose DualA ECO bit is set. I then read compensation from the CTC field, the cost to company block, the package details and the salary annexure images, and kept everything at 15 LPA or above.</p>
+    <p><b>One warning about the portal.</b> The eligibility grid rendered on the site is shifted by one column, so it reads the wrong bit for every programme. I validated both readings against the 1110 real placement records in the portal stats. The corrected reading matches 97% of actual placements. The grid on screen matches only 57%. This list uses the corrected reading, so a few companies here may show a red cross against DualA ECO on the website even though the underlying proforma says you are eligible.</p>
+    <p><b>Compensation</b> is stated the way each proforma states it. Where a proforma prices dual degree students separately, the dual degree number is the one shown.</p>
+  </div>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search company, role or requirement">
+    <select id="cat"><option value="">All role categories</option><option value="AI / ML Engineering">AI / ML Engineering</option><option value="AI / ML Research">AI / ML Research</option><option value="Analytics / Business Analyst">Analytics / Business Analyst</option><option value="Consulting">Consulting</option><option value="Consulting / Analytics">Consulting / Analytics</option><option value="Data Engineering">Data Engineering</option><option value="Data Science">Data Science</option><option value="Data Science / Analytics">Data Science / Analytics</option><option value="Data Science / Data Engineering">Data Science / Data Engineering</option><option value="Finance &amp; Consulting">Finance &amp; Consulting</option><option value="Finance / Quant Research">Finance / Quant Research</option><option value="Management">Management</option><option value="Management / Business Track">Management / Business Track</option><option value="Product Analyst">Product Analyst</option><option value="Product Analyst / APM">Product Analyst / APM</option><option value="Product Management">Product Management</option><option value="Strategy &amp; Operations">Strategy &amp; Operations</option></select>
+    <span id="count"></span>
+  </div>
+
+  <div class="tablewrap"><div class="scroll">
+    <table>
+      <colgroup>
+        <col class="c-num"><col class="c-co"><col class="c-cat">
+        <col class="c-ctc"><col class="c-desc"><col class="c-lnk">
+      </colgroup>
+      <thead><tr>
+        <th></th><th>Company and role</th><th>Roles category</th>
+        <th>CTC</th><th>What they require</th><th>Proforma</th>
+      </tr></thead>
+      <tbody id="tb">
+<tr data-cat="Product Management">
+<td class="num">1</td>
+<td class="co"><strong>Risa Labs, Inc.</strong><span class="role">Associate Product Manager - Growth</span><span class="loc">USA</span></td>
+<td><span class="tag">Product Management</span></td>
+<td class="ctc">USD 125K fixed + USD 25K ESOP (US based role)</td>
+<td class="desc">Growth product management. Design and run A/B tests, campaigns and feature launches to lift conversion and adoption. This posting is for the US office.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4770" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Finance / Quant Research">
+<td class="num">2</td>
+<td class="co"><strong>Pace Stock Broking Services Pvt. Ltd</strong><span class="role">Jr. Quantitative Researcher</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Finance / Quant Research</span></td>
+<td class="ctc">Up to ₹1.06 Cr (₹66 L gross + variable bonus)</td>
+<td class="desc">High frequency trading research. Build trading strategies from mathematical and statistical models and write high performance C++.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4533" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">3</td>
+<td class="co"><strong>Eigenwave</strong><span class="role">AI Engineer</span><span class="loc">Gurgaon</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹60 L PA</td>
+<td class="desc">Build AI agents and the infrastructure behind them. They want people who go past wiring APIs to LLMs and actually design reasoning and planning systems.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4881" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting">
+<td class="num">4</td>
+<td class="co"><strong>Accenture Japan</strong><span class="role">Business Consultant</span><span class="loc">Tokyo Office affiliation: Nationwide centered…</span></td>
+<td><span class="tag">Consulting</span></td>
+<td class="ctc">₹49.05 L PA</td>
+<td class="desc">Consulting on digital and business transformation. Interest in technology and comfort teaming with strategy consultants. Role is based in Japan.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4518" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting">
+<td class="num">5</td>
+<td class="co"><strong>Accenture Japan</strong><span class="role">Digital Consultant</span><span class="loc">Tokyo Office affiliation: Nationwide centered…</span></td>
+<td><span class="tag">Consulting</span></td>
+<td class="ctc">₹49.05 L PA</td>
+<td class="desc">Design technology solutions and enterprise architecture for government and enterprise clients. Strong interest in digital technology. Role is based in Japan.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4517" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Analyst">
+<td class="num">6</td>
+<td class="co"><strong>Eternal Limited(Formerly known as Zomato Limited)</strong><span class="role">Product Analyst</span><span class="loc">Gurgaon</span></td>
+<td><span class="tag">Product Analyst</span></td>
+<td class="ctc">₹47 L PA</td>
+<td class="desc">Turn customer insight into product decisions. They want analytical skill to evaluate product performance, proficiency with data analysis and visualisation tools and cross functional collaboration.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4855" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">7</td>
+<td class="co"><strong>MIKO</strong><span class="role">Junior AI Image Processing Engineer</span><span class="loc">Mumbai- Remote</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹46 L PA</td>
+<td class="desc">Image processing with PyTorch or TensorFlow. Visual GANs and synthetic image generation for consumer robotics.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5113" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">8</td>
+<td class="co"><strong>MIKO</strong><span class="role">Junior AI Audio &amp; Speech Engineer</span><span class="loc">Mumbai- Remote</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹46 L PA</td>
+<td class="desc">PyTorch or TensorFlow with transformer based models for speech and audio on consumer robots.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5111" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">9</td>
+<td class="co"><strong>MIKO</strong><span class="role">Junior AI NLP Engineer</span><span class="loc">Mumbai- Remote</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹46 L PA</td>
+<td class="desc">NLP with PyTorch and transformers. Language models plus prompt and context engineering.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5112" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">10</td>
+<td class="co"><strong>Navi</strong><span class="role">Data Scientist I</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹45.20 L PA</td>
+<td class="desc">Strong Python and SQL with pandas and scikit learn. Conceptual grip on machine learning, probability, optimisation and statistics. Work spans lending, collections, KYC and ads.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4512" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Management">
+<td class="num">11</td>
+<td class="co"><strong>Risa Labs, Inc.</strong><span class="role">Associate Technical Product Manager</span><span class="loc">.</span></td>
+<td><span class="tag">Product Management</span></td>
+<td class="ctc">₹38.86 L PA (₹18 L fixed + ₹16.86 L ESOP)</td>
+<td class="desc">Technical product management at an oncology AI startup founded by IIT Kanpur alumni. The proforma does not list a separate skill set.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5082" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Management">
+<td class="num">12</td>
+<td class="co"><strong>Navi</strong><span class="role">Associate Product Manager I</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Product Management</span></td>
+<td class="ctc">₹38.20 L PA</td>
+<td class="desc">Product thinking, structured problem solving and technology grounding. SQL for analysis. Empathy for the end user and strong written communication.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4511" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">13</td>
+<td class="co"><strong>Navi</strong><span class="role">Business Analyst I</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹38.20 L PA (₹23 L base + ESOP + bonuses)</td>
+<td class="desc">Analytical problem solving and statistical foundations such as sampling and distributions. Works across business, product, credit risk and collections analytics.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4531" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Strategy &amp; Operations">
+<td class="num">14</td>
+<td class="co"><strong>Navi</strong><span class="role">Associate Manager - Strategy and Business Operations (SBO)</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Strategy &amp; Operations</span></td>
+<td class="ctc">₹38.20 L PA</td>
+<td class="desc">Business first mindset with a data driven approach. Strong communication and comfort in an ambiguous fast paced setting. Owns customer facing operations problems.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4513" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Strategy &amp; Operations">
+<td class="num">15</td>
+<td class="co"><strong>Navi</strong><span class="role">Associate Manager - Credit Strategy</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Strategy &amp; Operations</span></td>
+<td class="ctc">₹38.20 L PA</td>
+<td class="desc">Highly analytical with the ability to find patterns in data and link them to credit risk metrics. Supports credit policy, portfolio monitoring and underwriting strategy.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4514" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Management">
+<td class="num">16</td>
+<td class="co"><strong>Risa Labs, Inc.</strong><span class="role">Associate Product Manager</span><span class="loc">Bangalore, INDIA</span></td>
+<td><span class="tag">Product Management</span></td>
+<td class="ctc">₹36.86 L PA</td>
+<td class="desc">Product strategy, UX and system design for AI driven oncology workflows.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4769" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Analyst / APM">
+<td class="num">17</td>
+<td class="co"><strong>Seekho</strong><span class="role">Product Track – Product Analyst / APM</span><span class="loc">Bengaluru</span></td>
+<td><span class="tag">Product Analyst / APM</span></td>
+<td class="ctc">₹36.70 L PA (₹18 L fixed + ₹9.7 L ESOP + bonuses)</td>
+<td class="desc">Product analyst to associate product manager track. Turn user insight into features, own metrics and launch AI driven learning experiences.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5077" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Strategy &amp; Operations">
+<td class="num">18</td>
+<td class="co"><strong>Seekho</strong><span class="role">Business Track – Strategy &amp; Growth</span><span class="loc">Bengaluru</span></td>
+<td><span class="tag">Strategy &amp; Operations</span></td>
+<td class="ctc">₹36.70 L PA (₹18 L fixed + ₹9.7 L ESOP + bonuses)</td>
+<td class="desc">Strategy and growth associate. Run growth experiments and new market launches and work directly with CXOs.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5079" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">19</td>
+<td class="co"><strong>CapitalOne</strong><span class="role">Associate (Business Analyst)</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹36.50 L PA</td>
+<td class="desc">Data driven decision science in credit and cards. Statistical modelling, forecasting, machine learning and customer analytics. The listed skills are useful and not mandatory for selection.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4739" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Management / Business Track">
+<td class="num">20</td>
+<td class="co"><strong>Meesho</strong><span class="role">Senior Associate - Business Management Track</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Management / Business Track</span></td>
+<td class="ctc">₹36.25 L PA (₹17.25 L fixed + ₹4.75 L JB per year)</td>
+<td class="desc">General management track at an e commerce platform. First principles problem solving and high ownership. The proforma does not list a specific skill set.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4494" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">21</td>
+<td class="co"><strong>Microsoft India</strong><span class="role">Data Scientist</span><span class="loc">Multiple Location in India</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹31.57 L for Dual Degree (₹37.78 L for M.Tech)</td>
+<td class="desc">Applied and data science role at IC2 level. The proforma job description is a template and the real detail sits in the attached document. Note the proforma prices dual degree students separately.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5004" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">22</td>
+<td class="co"><strong>Meesho</strong><span class="role">Data Scientist -I</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹31.5 L in year 1 (₹24 L fixed + ₹7.5 L JB). ₹60 L total four year offer</td>
+<td class="desc">Machine learning, deep learning, computer vision and statistics fundamentals. Python, SQL and PyTorch or TensorFlow. Hypothesis testing and model evaluation.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4740" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">23</td>
+<td class="co"><strong>Info edge</strong><span class="role">Data Scientist</span><span class="loc">Noida</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹31 L PA</td>
+<td class="desc">Strong machine learning, deep learning, NLP and information retrieval fundamentals with research exposure. Build systems over resumes, job descriptions and user behaviour data.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4505" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">24</td>
+<td class="co"><strong>AuxoAI</strong><span class="role">AI Engineer</span><span class="loc">Mumbai/Bangalore/Gurgaon/Hyderabad</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹27.10 L PA</td>
+<td class="desc">Build generative AI copilots for pricing, sales and customer experience. They want machine learning and deep learning depth, Python and solid data structures and algorithms.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4785" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">25</td>
+<td class="co"><strong>American Express</strong><span class="role">Management Trainee - Data Science &amp; Analytics</span><span class="loc">Hybrid (Gurgaon/Bangalore - depending on busin…</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹26.93 L for B.Tech + M.Tech (₹26.31 L for B.Tech)</td>
+<td class="desc">Data science and analytics management trainee. Statistical modelling and business problem solving across Amex products. The compensation image lists a separate B.Tech plus M.Tech row which is the one that applies to you.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4557" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">26</td>
+<td class="co"><strong>Searce Inc</strong><span class="role">AI Engineer</span><span class="loc">Pune, Mumbai, Bangalore, Hyderabad, Ahmedabad…</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹26 L PA (₹18 L fixed + ₹4 L variable + ₹4 L loyalty)</td>
+<td class="desc">AI engineering role. The detailed requirements sit in an attached job description document.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4949" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">27</td>
+<td class="co"><strong>Searce Inc</strong><span class="role">Evlos AI Engineer</span><span class="loc">Pune, Mumbai, Bangalore, Hyderabad, Ahmedabad…</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹26 L PA (₹18 L fixed + ₹4 L variable + ₹4 L loyalty)</td>
+<td class="desc">AI engineering on the Evlos product. The detailed requirements sit in an attached job description document.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4948" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Engineering">
+<td class="num">28</td>
+<td class="co"><strong>Searce Inc</strong><span class="role">Data Engineer</span><span class="loc">Pune, Mumbai, Bangalore, Hyderabad, Ahmedabad…</span></td>
+<td><span class="tag">Data Engineering</span></td>
+<td class="ctc">₹26 L PA (₹18 L fixed + ₹4 L variable + ₹4 L loyalty)</td>
+<td class="desc">Data engineering role. The detailed requirements sit in an attached job description document.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4951" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Finance &amp; Consulting">
+<td class="num">29</td>
+<td class="co"><strong>Nomura</strong><span class="role">Global Markets Analyst</span><span class="loc">Mumbai</span></td>
+<td><span class="tag">Finance &amp; Consulting</span></td>
+<td class="ctc">₹26 L PA + ₹2.5 L sign on</td>
+<td class="desc">Global markets analyst at an investment bank. The detailed requirements sit in an attached job description.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4757" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting">
+<td class="num">30</td>
+<td class="co"><strong>GDi Partners</strong><span class="role">Consultant</span><span class="loc">Our organisation&#x27;s headquarters are in Delhi.…</span></td>
+<td><span class="tag">Consulting</span></td>
+<td class="ctc">₹22.0 L to ₹25.8 L PA</td>
+<td class="desc">Public policy and development consulting. Work in teams of 3 to 5, break problems down, analyse datasets and engage senior leaders across government and philanthropy. Field visits are part of the job.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4544" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">31</td>
+<td class="co"><strong>Hilabs</strong><span class="role">Data Scientist</span><span class="loc">Pune/Bengaluru</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹25.75 L PA</td>
+<td class="desc">Healthcare AI. They want machine learning, statistics, linear algebra, optimisation, A/B testing and text mining with Python and big data tools.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4707" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Management">
+<td class="num">32</td>
+<td class="co"><strong>Hilabs</strong><span class="role">Associate Product Manager</span><span class="loc">Pune/Bengaluru</span></td>
+<td><span class="tag">Product Management</span></td>
+<td class="ctc">₹25.75 L PA</td>
+<td class="desc">Product management with customer research, Excel and SQL, requirement gathering, wireframing and metrics driven decisions.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4706" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">33</td>
+<td class="co"><strong>Auro Digital Inc.</strong><span class="role">AI Engineer</span><span class="loc">Delhi</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹25 L PA</td>
+<td class="desc">Entry level AI and ML engineering. Foundations in algorithms, linear algebra and statistics plus Python and familiarity with TensorFlow, PyTorch or scikit learn.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5190" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">34</td>
+<td class="co"><strong>Battery Smart</strong><span class="role">Data Analyst I</span><span class="loc">Gurgaon</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹25 L PA</td>
+<td class="desc">SQL and Python with pandas and NumPy. Understanding of machine learning and statistics. Turn large operational and IoT datasets into insight.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4981" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Strategy &amp; Operations">
+<td class="num">35</td>
+<td class="co"><strong>Battery Smart</strong><span class="role">Associate - Strategy &amp; Ops</span><span class="loc">Gurgaon</span></td>
+<td><span class="tag">Strategy &amp; Operations</span></td>
+<td class="ctc">₹25 L PA</td>
+<td class="desc">SQL and Python plus an understanding of business strategy, market research and operational workflows. Comfort with large messy real world data.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4983" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">36</td>
+<td class="co"><strong>Bachatt</strong><span class="role">Business Analyst</span><span class="loc">Gurgaon</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹24.50 L PA</td>
+<td class="desc">Fintech analytics. Excel, SQL and Python with structured thinking and stakeholder management. Build dashboards, run A/B tests and present straight to founders.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4734" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Finance &amp; Consulting">
+<td class="num">37</td>
+<td class="co"><strong>HSBC</strong><span class="role">Trainee Anlayst</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Finance &amp; Consulting</span></td>
+<td class="ctc">₹24 L PA</td>
+<td class="desc">Analyst trainee at a global bank. The detailed requirements sit in an attached job description.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5005" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">38</td>
+<td class="co"><strong>Netradyne Technology India</strong><span class="role">Associate Data Scientist/ Data Scientist - Analytics</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹22 L for B.Tech / ₹24 L for M.Tech</td>
+<td class="desc">Statistics, probability, machine learning and estimation theory. Build and deploy models for driving risk and coaching. A/B testing and real time edge computing feature in the work.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4932" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science / Analytics">
+<td class="num">39</td>
+<td class="co"><strong>Accenture Solutions Pvt Ltd - Data AI</strong><span class="role">Ind and Func AI Decision Science Analyst</span><span class="loc">Gurgaon/Mumbai/Bangalore</span></td>
+<td><span class="tag">Data Science / Analytics</span></td>
+<td class="ctc">₹23.36 L PA</td>
+<td class="desc">Marketing and customer analytics, segmentation and forecasting. Regression, clustering, decision trees and survival analysis. Python preferred with R or SAS.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4854" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">40</td>
+<td class="co"><strong>IDFC FIRST Bank</strong><span class="role">Associate Data Analyst</span><span class="loc">Mumbai</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹23 L PA</td>
+<td class="desc">Data analysis with machine learning and deep learning exposure. Works with product, sales, credit and operations to build insight and data products.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4812" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting / Analytics">
+<td class="num">41</td>
+<td class="co"><strong>Indus Insights &amp; Analytics Services</strong><span class="role">Associate</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Consulting / Analytics</span></td>
+<td class="ctc">₹21.37 L PA</td>
+<td class="desc">Analytics consulting. Translate business problems into frameworks, build clean datasets, apply regression and machine learning and present to CXOs. Client and project management is part of the role.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4658" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">42</td>
+<td class="co"><strong>Snapmint</strong><span class="role">Analyst</span><span class="loc">Mumbai, Bengaluru</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹21 L PA</td>
+<td class="desc">SQL and Python for a consumer lending and zero cost EMI product.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4871" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">43</td>
+<td class="co"><strong>VMock India Pvt. Ltd.</strong><span class="role">Data Scientist/Software Engineer</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹21 L PA (₹18 L fixed + up to ₹3 L bonus)</td>
+<td class="desc">Dual track role. The data science side wants deep learning with CNNs and transformers, GenAI, SQL, pandas and NumPy. Python plus PHP and TypeScript appear in the stack.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4874" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting">
+<td class="num">44</td>
+<td class="co"><strong>Finmechanics</strong><span class="role">Associate Consultant</span><span class="loc">Mumbai</span></td>
+<td><span class="tag">Consulting</span></td>
+<td class="ctc">₹20.70 L PA</td>
+<td class="desc">Implementation consulting for financial markets and risk. Good mathematical skill, logical thinking and ownership. You build knowledge of markets, instruments and risk models on the job.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4552" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Research">
+<td class="num">45</td>
+<td class="co"><strong>Nasiko</strong><span class="role">Research Scientist</span><span class="loc">Bangalore</span></td>
+<td><span class="tag">AI / ML Research</span></td>
+<td class="ctc">₹20 L PA</td>
+<td class="desc">Core AI research on multi agent systems. Depth in machine learning, deep learning, reinforcement learning, planning, graph learning or optimisation with a research track record.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5214" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">46</td>
+<td class="co"><strong>Intellimation.ai</strong><span class="role">Algorithm Development Engineer – Graph &amp; Entity Intelligence Platform</span><span class="loc">Pune</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹16 L to ₹20 L PA</td>
+<td class="desc">Research driven product development on graph algorithms, entity resolution, knowledge graphs, graph embeddings and GNNs. Works with billion node datasets.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5157" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Engineering">
+<td class="num">47</td>
+<td class="co"><strong>C3iHub (IHub NTIHAC Foundation), IIT Kanpur</strong><span class="role">Data Engineer</span><span class="loc">Kanpur</span></td>
+<td><span class="tag">Data Engineering</span></td>
+<td class="ctc">₹20 L PA</td>
+<td class="desc">Build scalable distributed data infrastructure. They want understanding of blockchain protocols, systems engineering and architectural design. Heavier on engineering than on analytics.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5007" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">48</td>
+<td class="co"><strong>House Of Edtech</strong><span class="role">AI Generalist</span><span class="loc">Bengaluru/Pune/Kolkata</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹20 L PA</td>
+<td class="desc">Hands on daily use of AI tools, clear communication and analytical thinking. Content and product work for an edtech at scale. Open to 2025 and 2026 batches from IITs and NITs.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5044" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Analyst">
+<td class="num">49</td>
+<td class="co"><strong>ARCON</strong><span class="role">Technical Product Analyst</span><span class="loc">Mumbai</span></td>
+<td><span class="tag">Product Analyst</span></td>
+<td class="ctc">₹20 L PA</td>
+<td class="desc">Product analyst for a cybersecurity product. Strong analytical and logical reasoning, familiarity with Excel or Power BI and an understanding of product lifecycle and functional documentation.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4988" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">50</td>
+<td class="co"><strong>Searce Inc</strong><span class="role">Analyst - Business Process Improvement</span><span class="loc">Pune, Mumbai, Bangalore, Hyderabad, Ahmedabad…</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹20 L PA</td>
+<td class="desc">Business process improvement analyst. The detailed requirements sit in an attached job description document.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4952" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting">
+<td class="num">51</td>
+<td class="co"><strong>Searce Inc</strong><span class="role">Solutions Consultant</span><span class="loc">Mumbai, Pune, Bangalore, Hyderabad, Ahmedabad…</span></td>
+<td><span class="tag">Consulting</span></td>
+<td class="ctc">₹20 L PA</td>
+<td class="desc">Solutions consulting role. The detailed requirements sit in an attached job description document.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4947" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science / Data Engineering">
+<td class="num">52</td>
+<td class="co"><strong>Oliver Wyman</strong><span class="role">Data Scientist/Data Engineer</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Data Science / Data Engineering</span></td>
+<td class="ctc">₹20 L fixed + performance bonus at 8% of fixed</td>
+<td class="desc">Analytics driven management consulting. Python, SQL and R, machine learning frameworks and cloud exposure on AWS, Azure or GCP.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4673" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Management">
+<td class="num">53</td>
+<td class="co"><strong>Nation with Namo</strong><span class="role">Associate</span><span class="loc">PAN India (As per project requirement)</span></td>
+<td><span class="tag">Management</span></td>
+<td class="ctc">₹19 L PA</td>
+<td class="desc">Political campaign and strategy associate. The detailed requirements sit in an attached job description.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4851" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">54</td>
+<td class="co"><strong>Accenture Operations</strong><span class="role">Associate Data scientist</span><span class="loc">Bengaluru</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹18.56 L PA</td>
+<td class="desc">Asks specifically for a postgraduate or Dual Degree in a computational field such as statistics, mathematics, economics or operations research. Strong Python and R plus solid machine learning across supervised, unsupervised and neural network methods.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4911" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting">
+<td class="num">55</td>
+<td class="co"><strong>Alvarez &amp; Marsal</strong><span class="role">Assoicate</span><span class="loc">Mumbai OR Delhi</span></td>
+<td><span class="tag">Consulting</span></td>
+<td class="ctc">₹18.30 L PA</td>
+<td class="desc">Business transformation consulting for private equity funds and large corporates. Good communication, analytics skills and MS Office.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4549" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Finance &amp; Consulting">
+<td class="num">56</td>
+<td class="co"><strong>Barclays</strong><span class="role">Risk Graduate Analyst</span><span class="loc">Noida</span></td>
+<td><span class="tag">Finance &amp; Consulting</span></td>
+<td class="ctc">₹18 L PA + retirals</td>
+<td class="desc">Risk analyst graduate programme at a global bank. The detailed requirements sit in an attached job description.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4955" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science / Analytics">
+<td class="num">57</td>
+<td class="co"><strong>Kotak</strong><span class="role">Data Science &amp; Analytics</span><span class="loc">PAN India</span></td>
+<td><span class="tag">Data Science / Analytics</span></td>
+<td class="ctc">₹18 L PA</td>
+<td class="desc">Quantitative degree with Python and SQL. Hands on machine learning and deep learning. Build risk scorecards and behavioural models for the bank.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4650" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science / Analytics">
+<td class="num">58</td>
+<td class="co"><strong>Olyv (Smartcoin financial Pvt. Ltd.)</strong><span class="role">Data Scientist/Analyst Trainee</span><span class="loc">Bangalore, Karnataka</span></td>
+<td><span class="tag">Data Science / Analytics</span></td>
+<td class="ctc">₹18 L PA</td>
+<td class="desc">Python with data science and analytics. Credit risk scoring, collections models, customer segmentation and fraud detection for a lending app.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4777" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting / Analytics">
+<td class="num">59</td>
+<td class="co"><strong>MasterCard</strong><span class="role">Associate Consultant, Performance Analytics</span><span class="loc">Gurgaon/Mumbai/Hyderabad</span></td>
+<td><span class="tag">Consulting / Analytics</span></td>
+<td class="ctc">₹17.73 L PA (₹15 L base + bonuses)</td>
+<td class="desc">Data intensive management consulting on Mastercard data assets. Blends strategy consulting with analytics for banking, payments and retail clients.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4746" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science / Analytics">
+<td class="num">60</td>
+<td class="co"><strong>GAIN Credit</strong><span class="role">Analytics Scientist I</span><span class="loc">Chennai/Noida</span></td>
+<td><span class="tag">Data Science / Analytics</span></td>
+<td class="ctc">₹17.08 L PA</td>
+<td class="desc">Analytics and data science for consumer lending products. The detailed requirements sit in an attached job description.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4910" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Finance &amp; Consulting">
+<td class="num">61</td>
+<td class="co"><strong>Futures First Info Services Pvt Ltd</strong><span class="role">Trainee - International Markets</span><span class="loc">Gurugram, Jaipur</span></td>
+<td><span class="tag">Finance &amp; Consulting</span></td>
+<td class="ctc">₹17.04 L PA</td>
+<td class="desc">Trading trainee on international markets. The detailed requirements sit in an attached job description.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4901" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">62</td>
+<td class="co"><strong>Aspect Ratio Private Limited</strong><span class="role">Analyst</span><span class="loc">Pune</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹17 L PA</td>
+<td class="desc">Data analytics and research consulting. They value structured thinking, communication and attention to detail. Prior programming experience is a bonus and not a requirement.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4780" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">63</td>
+<td class="co"><strong>64squares</strong><span class="role">Business Analyst</span><span class="loc">Pune/Bangalore/Hyderabad</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹16.52 L PA</td>
+<td class="desc">Python, SQL and Excel. Build predictive models and optimisation algorithms. Work with R, Spark, AWS and LLMs on client analytics problems.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5197" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Research">
+<td class="num">64</td>
+<td class="co"><strong>SuperAGI</strong><span class="role">AI Researcher</span><span class="loc">4th Block, 643, 80 Feet Rd, opp. Swathi Mahara…</span></td>
+<td><span class="tag">AI / ML Research</span></td>
+<td class="ctc">₹16 L PA</td>
+<td class="desc">Deep understanding of generative models, reinforcement learning and deep learning architectures. Strong with machine learning frameworks. Research on autonomous agents.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5163" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="AI / ML Engineering">
+<td class="num">65</td>
+<td class="co"><strong>QualityKiosk Technologies</strong><span class="role">Forward Deployed /Applied AI Engineer</span><span class="loc">Mumbai, Bengaluru, Pune, Gurgaon, Chennai</span></td>
+<td><span class="tag">AI / ML Engineering</span></td>
+<td class="ctc">₹16 L PA</td>
+<td class="desc">Customer facing applied AI. Build integrations and automations in TypeScript, JavaScript and Python. Prompt engineering for LLMs and semantic search tuning.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5074" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Consulting">
+<td class="num">66</td>
+<td class="co"><strong>QualityKiosk Technologies</strong><span class="role">Business Consultant</span><span class="loc">Mumbai, Bengaluru, Pune, Gurgaon, Chennai</span></td>
+<td><span class="tag">Consulting</span></td>
+<td class="ctc">₹16 L PA</td>
+<td class="desc">The qFly leadership programme. A three year rotation across strategy, sales, product, delivery, finance and operations with a stated path to front end leadership roles.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4848" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">67</td>
+<td class="co"><strong>VMock India Pvt. Ltd.</strong><span class="role">Data Analyst</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹16 L PA (₹13 L fixed + up to ₹3 L bonus)</td>
+<td class="desc">SQL and Python with pandas. Statistics and probability. Product analytics plus prompt writing and evaluation of AI model outputs.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5066" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Analyst">
+<td class="num">68</td>
+<td class="co"><strong>VMock India Pvt. Ltd.</strong><span class="role">Product Analyst</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Product Analyst</span></td>
+<td class="ctc">₹16 L PA (₹13 L fixed + up to ₹3 L bonus)</td>
+<td class="desc">Quantitative and qualitative analysis. Knowledge of data analytics, machine learning and NLP is preferred. Work with product managers on roadmap priorities.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4888" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Data Science">
+<td class="num">69</td>
+<td class="co"><strong>Aria Intelligent Solutions</strong><span class="role">Data Scientist</span><span class="loc">Delhi</span></td>
+<td><span class="tag">Data Science</span></td>
+<td class="ctc">₹15.40 L PA</td>
+<td class="desc">Python programming with a solid grasp of statistics and machine learning. Graduate data scientist role pitched at 0 to 1 year experience. Consulting and analytics delivery for global clients.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4860" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">70</td>
+<td class="co"><strong>SiriusAI</strong><span class="role">Analyst</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹15.40 L PA (₹12 L fixed + variable + ₹1 L JB)</td>
+<td class="desc">Data driven consulting for global clients. One programming language such as Python, basic algorithms and strong analytical problem solving. You help build and deploy machine learning and generative AI models.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4924" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">71</td>
+<td class="co"><strong>Kissht</strong><span class="role">Analyst Trainee</span><span class="loc">Mumbai</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹15 L fixed + 10% variable</td>
+<td class="desc">SQL and Excel with Python or R. Build dashboards in Power BI or Tableau. Analyse credit, product and operations data to support business decisions.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5191" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Finance / Quant Research">
+<td class="num">72</td>
+<td class="co"><strong>MarsQuant Innovations LLP</strong><span class="role">Quantitative Researcher and Developer</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Finance / Quant Research</span></td>
+<td class="ctc">₹15 L PA</td>
+<td class="desc">Python with pandas, NumPy and SciPy plus C++ or C#. Build and backtest systematic trading strategies. Monte Carlo simulation and walk forward testing.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5102" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">73</td>
+<td class="co"><strong>Tipping Mr Pink Pvt LTD</strong><span class="role">Revenue Analyst</span><span class="loc">Gurugram</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹15 L PA</td>
+<td class="desc">Own the P&amp;L for a set of outlets, analyse performance and drive profitability. Fast paced QSR environment at Burger Singh.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/5134" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Analytics / Business Analyst">
+<td class="num">74</td>
+<td class="co"><strong>Tiger Analytics</strong><span class="role">Trainee - Analyst</span><span class="loc">Chennai</span></td>
+<td><span class="tag">Analytics / Business Analyst</span></td>
+<td class="ctc">₹15 L PA (₹13 L fixed + ₹2 L JB)</td>
+<td class="desc">Analytics and data science trainee at an AI and analytics services firm serving Fortune 1000 clients.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4937" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Analyst">
+<td class="num">75</td>
+<td class="co"><strong>Sprinklr</strong><span class="role">Product Analyst</span><span class="loc">Gurgaon</span></td>
+<td><span class="tag">Product Analyst</span></td>
+<td class="ctc">₹15 L PA</td>
+<td class="desc">Engineering or management degree. Strong ownership, communication and presentation. High accuracy in a fast moving product team.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4720" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+<tr data-cat="Product Management">
+<td class="num">76</td>
+<td class="co"><strong>Flipkart</strong><span class="role">Associate Product Manager</span><span class="loc">Bengaluru</span></td>
+<td><span class="tag">Product Management</span></td>
+<td class="ctc">Clears 15 LPA. Exact figure not in the proforma, which lists only &quot;PFA Comp Structure&quot;</td>
+<td class="desc">Associate product manager role. The proforma points to an attached job description and compensation sheet rather than listing the detail inline.</td>
+<td class="lnk"><a href="https://iitk-spo26.netlify.app/details/4542" target="_blank" rel="noopener">View details &rarr;</a></td>
+</tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <footer>Sorted by compensation, highest first. Flipkart sits last because its proforma prints no figure, not because it pays least. It clears the threshold. Source: iitk-spo26.netlify.app proforma data.</footer>
+</div>
+<script>
+  var q=document.getElementById('q'), cat=document.getElementById('cat'),
+      rows=[].slice.call(document.querySelectorAll('#tb tr')), cnt=document.getElementById('count');
+  function apply() {
+    var t=q.value.toLowerCase(), c=cat.value, n=0;
+    rows.forEach(function(r) {
+      var ok=(!c||r.dataset.cat===c) && (!t||r.textContent.toLowerCase().indexOf(t)>-1);
+      r.hidden=!ok; if(ok) n++;
+    });
+    cnt.textContent=n+' of '+rows.length+' shown';
+  }
+  q.addEventListener('input',apply); cat.addEventListener('change',apply); apply();
+</script>
+</body>
+</html>
